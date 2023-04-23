@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EnlectorTool - Home</title>
+</head>
+<body>
+<h1>Welcome to EnlectorTool</h1>
+<form th:action="@{/addStudent}" th:object="${studentDto}" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" th:field="*{firstName}" id="firstName"/>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" th:field="*{lastName}" id="lastName"/>
+
+    <label for="email">Email:</label>
+    <input type="text" th:field="*{email}" id="email"/>
+
+    <input type="submit" value="Add Student"/>
+</form>
+</body>
+</html>
