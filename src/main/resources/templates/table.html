@@ -62,7 +62,7 @@
         <td th:text="${lection.level}"></td>
         <td>
             <ul>
-                <li th:each="student : ${lection.student}" th:text="${student.firstName + ' ' + student.lastName}"></li>
+                <li th:each="student : ${lection.student}" th:text="${student.firstName + ' ' + student.lastName+ ', email:' + student.email}"></li>
             </ul>
         </td>
     </tr>
