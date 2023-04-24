@@ -34,6 +34,16 @@ public class MvcController {
         return "redirect:/";
     }
 
+
+    @GetMapping("/table/{token}")
+    public String table(Model model, @PathVariable String token) {
+        if (token.equals(tokenEnv)){
+            model.addAttribute("lections",lectionService.getAllLections());
+            return "table";
+        }
+        return "redirect:/";
+    }
+
     @PostMapping("/addStudent")
     public String addStudent(@ModelAttribute("studentDto") StudentDto studentDto) {
         studentService.registerNewUser(studentDto);
