@@ -17,7 +17,7 @@ public class Student {
     private String email;
     private Boolean isActive;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "lectionId")
     private Lection lection;
 

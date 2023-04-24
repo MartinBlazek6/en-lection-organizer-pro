@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @Data
@@ -20,6 +22,6 @@ public class Lection {
         this.level = level;
     }
 
-    @OneToOne(mappedBy = "lection", cascade = CascadeType.ALL)
-    private Student student;
+    @OneToMany(mappedBy = "lection", cascade = CascadeType.ALL)
+    private List<Student> student;
 }

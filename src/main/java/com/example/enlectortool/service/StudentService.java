@@ -9,6 +9,8 @@ import com.example.enlectortool.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class StudentService {
@@ -27,7 +29,9 @@ public class StudentService {
         Lection lection = lectionRepository.getReferenceById(lectionId);
         Student student = studentRepository.getReferenceById(studentId);
 
-        lection.setStudent(student);
+        var lectionStudent = lection.getStudent();
+        lectionStudent.add(student);
+        lection.setStudent(lectionStudent);
         student.setLection(lection);
 
         studentRepository.saveAndFlush(student);
