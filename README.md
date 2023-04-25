@@ -23,12 +23,12 @@ To run this project, you will need to add the following environment variables to
 
 so 
 
-https://en-lection-organizer-pro.up.railway.app//admin/asd 
+https://en-lection-organizer-pro.up.railway.app/admin/asd 
 
 for adding new lections
 
 
-https://en-lection-organizer-pro.up.railway.app//table/asd 
+https://en-lection-organizer-pro.up.railway.app/table/asd 
 
 for checking who is in which lection an is active
 
