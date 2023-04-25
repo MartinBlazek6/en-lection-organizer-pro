@@ -19,7 +19,7 @@ To run this project, you will need to add the following environment variables to
 
 `SERVER` server where is this app hosted
 
-`token` special secret key for lectors, so only they can acces admin panel and table it is "from default"
+`token` special secret key for lectors, so only they can acces admin panel and table it is "asd" from default
 
 so 
 
