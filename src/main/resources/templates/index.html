@@ -95,6 +95,7 @@
     <th>Lection Id</th>
     <th>Title</th>
     <th>Level</th>
+    <th>Date</th>
   </tr>
   </thead>
   <tbody>
@@ -102,6 +103,7 @@
     <td th:text="${lection.lectionId}" />
     <td th:text="${lection.title}" />
     <td th:text="${lection.level}" />
+    <td th:text="${#dates.format(lection.date, 'dd-MM-yyyy')}"></td>
   </tr>
   </tbody>
 </table>

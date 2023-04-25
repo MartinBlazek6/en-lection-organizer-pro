@@ -62,9 +62,26 @@
         <td th:text="${lection.level}"></td>
         <td>
             <ul>
-                <li th:each="student : ${lection.student}" th:text="${student.firstName + ' ' + student.lastName+ ', email:' + student.email}"></li>
+                <li th:each="student : ${lection.student}"
+                    th:classappend="${student.isActive} ? 'bg-success' : 'bg-danger'"
+                    th:style="${student.isActive} ? 'background-color: #90EE90' : 'background-color: #FFC0CB'"
+                    th:text="${student.firstName + ' ' +
+                      student.lastName + ' ,Email: ' +
+                      student.email}">
+                </li>
             </ul>
         </td>
+
+
+
+        <!--        <td>-->
+<!--            <ul>-->
+<!--                <li th:each="student : ${lection.student}" th:text="${student.firstName + ' ' +-->
+<!--                                                                      student.lastName + ' paid? ' +-->
+<!--                                                                      student.isActive+ ' email:' +-->
+<!--                                                                      student.email}"></li>-->
+<!--            </ul>-->
+<!--        </td>-->
     </tr>
     </tbody>
 </table>

@@ -71,6 +71,9 @@
     <label for="level">Level:</label>
     <input type="text" id="level" name="level" />
     <br />
+    <label>Date:</label>
+    <input type="date" th:name="date" required/>
+    <br />
     <input type="submit" value="Submit" />
 </form>
 
@@ -81,6 +84,7 @@
         <th>Lection Id</th>
         <th>Title</th>
         <th>Level</th>
+        <th>Date</th>
     </tr>
     </thead>
     <tbody>
@@ -88,6 +92,7 @@
         <td th:text="${lection.lectionId}" />
         <td th:text="${lection.title}" />
         <td th:text="${lection.level}" />
+        <td th:text="${#dates.format(lection.date, 'dd-MM-yyyy')}"></td>
     </tr>
     </tbody>
 </table>

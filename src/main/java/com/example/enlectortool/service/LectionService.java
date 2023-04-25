@@ -6,6 +6,7 @@ import com.example.enlectortool.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,8 +17,8 @@ public class LectionService {
     private final StudentRepository studentRepository;
 
 
-    public void createLection(String title,String level){
-        lectionRepository.save(new Lection(title,level));
+    public void createLection(String title, String level, Date date){
+        lectionRepository.save(new Lection(title,level,date));
     }
 
     public List<Lection> getAllLections(){

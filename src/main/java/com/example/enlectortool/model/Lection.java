@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,10 +17,17 @@ public class Lection {
     private Long lectionId;
     private String title;
     private String level;
+    private Date date;
 
     public Lection(String title, String level) {
         this.title = title;
         this.level = level;
+    }
+
+    public Lection(String title, String level, Date date) {
+        this.title = title;
+        this.level = level;
+        this.date = date;
     }
 
     @ManyToMany

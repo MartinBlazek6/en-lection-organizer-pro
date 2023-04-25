@@ -2,6 +2,7 @@ package com.example.enlectortool.controller;
 
 
 import com.example.enlectortool.model.DTO.StudentDto;
+import com.example.enlectortool.service.DateService;
 import com.example.enlectortool.service.LectionService;
 import com.example.enlectortool.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @Controller
 @RequiredArgsConstructor
 public class MvcController {
 
     private final StudentService studentService;
     private final LectionService lectionService;
+    private final DateService dateService;
 
     private final String tokenEnv = System.getenv("token");
 
@@ -51,8 +55,10 @@ public class MvcController {
     }
 
     @PostMapping("/createLection")
-    public String createLection(@RequestParam String title, String level){
-        lectionService.createLection(title,level);
+    public String createLection(@RequestParam String title, String level, String date){
+
+        Date dateConverted = dateService.convertStringToDate(date);
+        lectionService.createLection(title,level,dateConverted);
         return "redirect:/"+tokenEnv;
     }
 
