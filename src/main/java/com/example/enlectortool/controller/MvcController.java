@@ -29,7 +29,7 @@ public class MvcController {
         return "index";
     }
 
-    @GetMapping("/{token}")
+    @GetMapping("/admin/{token}")
     public String lectorPanel(Model model, @PathVariable String token) {
         if (token.equals(tokenEnv)){
             model.addAttribute("lections",lectionService.getAllLections());
@@ -59,7 +59,7 @@ public class MvcController {
 
         Date dateConverted = dateService.convertStringToDate(date);
         lectionService.createLection(title,level,dateConverted);
-        return "redirect:/"+tokenEnv;
+        return "redirect:/admin/"+tokenEnv;
     }
 
     @PostMapping("/addStudentToLection")
