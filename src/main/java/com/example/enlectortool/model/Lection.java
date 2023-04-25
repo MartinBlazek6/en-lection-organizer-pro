@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @Data
@@ -14,12 +17,19 @@ public class Lection {
     private Long lectionId;
     private String title;
     private String level;
+    private Date date;
 
     public Lection(String title, String level) {
         this.title = title;
         this.level = level;
     }
 
-    @OneToOne(mappedBy = "lection", cascade = CascadeType.ALL)
-    private Student student;
+    public Lection(String title, String level, Date date) {
+        this.title = title;
+        this.level = level;
+        this.date = date;
+    }
+
+    @ManyToMany
+    private List<Student> student;
 }

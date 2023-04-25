@@ -14,13 +14,14 @@ public class EmailVerificationService {
 
     private final EmailService emailService;
     private final StudentRepository studentRepository;
+    private final String SERVER = System.getenv("SERVER");
 
     public void createEmailToken(Student user) {
         studentRepository.saveAndFlush(user);
 
         String secret = user.getFirstName() + user.getEmail() + "Đ";
         int secretInt = secret.hashCode();
-        String link = "http://localhost:8080/api/v1/login/" + user.getStudentId() + "/" + secretInt;
+        String link = SERVER+"/api/v1/login/" + user.getStudentId() + "/" + secretInt;
         emailService.sendMailWithHtml(user.getEmail(), buildEmail(user.getFirstName(), link));
     }
 

@@ -27,8 +27,14 @@ public class StudentService {
         Lection lection = lectionRepository.getReferenceById(lectionId);
         Student student = studentRepository.getReferenceById(studentId);
 
-        lection.setStudent(student);
-        student.setLection(lection);
+        var students = lection.getStudent();
+        var lections = student.getLection();
+
+        students.add(student);
+        lections.add(lection);
+
+        lection.setStudent(students);
+        student.setLection(lections);
 
         studentRepository.saveAndFlush(student);
         lectionRepository.saveAndFlush(lection);

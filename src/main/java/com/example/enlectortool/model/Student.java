@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @Data
@@ -17,9 +19,8 @@ public class Student {
     private String email;
     private Boolean isActive;
 
-    @OneToOne
-    @JoinColumn(name = "lectionId")
-    private Lection lection;
+    @ManyToMany
+    private List<Lection> lection;
 
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
