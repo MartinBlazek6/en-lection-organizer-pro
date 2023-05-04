@@ -20,7 +20,6 @@ public class StudentService {
     public Student registerNewUser(StudentDto user) {
         Student student = new Student(user.getFirstName(), user.getLastName(), user.getEmail());
         emailVerificationService.createEmailToken(student);
-        emailVerificationService.sendInvoiceByLection(lectionRepository.getReferenceById(1L));
         return studentRepository.save(student);
     }
 
