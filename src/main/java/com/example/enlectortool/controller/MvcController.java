@@ -1,6 +1,7 @@
 package com.example.enlectortool.controller;
 
 
+import com.example.enlectortool.emailConfiguration.EmailVerificationService;
 import com.example.enlectortool.model.DTO.StudentDto;
 import com.example.enlectortool.service.DateService;
 import com.example.enlectortool.service.LectionService;
@@ -18,6 +19,7 @@ public class MvcController {
 
     private final StudentService studentService;
     private final LectionService lectionService;
+    private final EmailVerificationService emailVerificationService;
     private final DateService dateService;
 
     private final String tokenEnv = System.getenv("token");
@@ -59,6 +61,12 @@ public class MvcController {
 
         Date dateConverted = dateService.convertStringToDate(date);
         lectionService.createLection(title,level,dateConverted);
+        return "redirect:/admin/"+tokenEnv;
+    }
+
+    @PostMapping("/sendInvoices")
+    public String sendInvoices(@RequestParam Long lectionId){
+        emailVerificationService.sendInvoiceByLection(lectionService.getLectionById(lectionId));
         return "redirect:/admin/"+tokenEnv;
     }
 

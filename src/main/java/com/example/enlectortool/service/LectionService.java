@@ -1,6 +1,7 @@
 package com.example.enlectortool.service;
 
 import com.example.enlectortool.model.Lection;
+import com.example.enlectortool.model.Student;
 import com.example.enlectortool.repository.LectionRepository;
 import com.example.enlectortool.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,16 @@ public class LectionService {
 
     public List<Lection> getAllLections(){
         return lectionRepository.findAll();
+    }
+
+    public Lection getLectionById(Long id) { return lectionRepository.getReferenceById(id);}
+
+    public List<Student> getAllStudentsByLectionAndStatus(Lection lection, boolean isPaid){
+        return studentRepository.findAllByLectionAndIsActive(lection,isPaid);
+    }
+
+    public void sendEmailInvoiceToInactiveStudentsByLection(Lection lection){
+        var a =getAllStudentsByLectionAndStatus(lection,false);
     }
 
 }
