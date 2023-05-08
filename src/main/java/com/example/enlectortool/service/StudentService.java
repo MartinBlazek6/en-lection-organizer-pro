@@ -23,6 +23,8 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+
+
     public void addStudentToLection(Long lectionId,Long studentId){
         Lection lection = lectionRepository.getReferenceById(lectionId);
         Student student = studentRepository.getReferenceById(studentId);

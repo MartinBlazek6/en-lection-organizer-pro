@@ -22,7 +22,7 @@
         display: block;
         margin-top: 20px;
     }
-    input[type="text"], input[type="email"] {
+    input[type="text"], input[type="email"], input[type="number"] {
         display: block;
         width: 100%;
         padding: 10px;
@@ -71,8 +71,8 @@
     <label for="level">Level:</label>
     <input type="text" id="level" name="level" />
     <br />
-    <label>Date:</label>
-    <input type="date" th:name="date" required/>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required />
     <br />
     <input type="submit" value="Submit" />
 </form>
@@ -85,6 +85,7 @@
         <th>Title</th>
         <th>Level</th>
         <th>Date</th>
+        <th>Send Invoices</th>
     </tr>
     </thead>
     <tbody>
@@ -93,8 +94,115 @@
         <td th:text="${lection.title}" />
         <td th:text="${lection.level}" />
         <td th:text="${#dates.format(lection.date, 'dd-MM-yyyy')}"></td>
+        <td>
+            <form th:action="@{/sendInvoices}" method="post">
+                <input type="hidden" th:name="lectionId" th:value="${lection.lectionId}" />
+                <input type="submit" value="Send Invoices" />
+            </form>
+        </td>
     </tr>
-    </tbody>
-</table>
-</body>
-</html>
+        </tbody>
+    </table>
+    </body>
+    </html>
+
+    <!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>EnlectorTool</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<style>-->
+<!--    body {-->
+<!--        font-family: sans-serif;-->
+<!--    }-->
+<!--    h1, h2 {-->
+<!--        margin-top: 30px;-->
+<!--        margin-bottom: 20px;-->
+<!--        text-align: center;-->
+<!--    }-->
+<!--    form {-->
+<!--        margin: 0 auto;-->
+<!--        max-width: 500px;-->
+<!--    }-->
+<!--    label {-->
+<!--        display: block;-->
+<!--        margin-top: 20px;-->
+<!--    }-->
+<!--    input[type="text"], input[type="email"] {-->
+<!--        display: block;-->
+<!--        width: 100%;-->
+<!--        padding: 10px;-->
+<!--        margin-top: 5px;-->
+<!--        margin-bottom: 20px;-->
+<!--        border: 1px solid #ccc;-->
+<!--        border-radius: 5px;-->
+<!--        box-sizing: border-box;-->
+<!--        font-size: 16px;-->
+<!--    }-->
+<!--    input[type="submit"] {-->
+<!--        background-color: #4CAF50;-->
+<!--        color: white;-->
+<!--        padding: 10px 20px;-->
+<!--        border: none;-->
+<!--        border-radius: 5px;-->
+<!--        cursor: pointer;-->
+<!--        font-size: 16px;-->
+<!--        margin-top: 20px;-->
+<!--    }-->
+<!--    table {-->
+<!--        margin: 0 auto;-->
+<!--        border-collapse: collapse;-->
+<!--        border-spacing: 0;-->
+<!--        width: 100%;-->
+<!--        max-width: 800px;-->
+<!--    }-->
+<!--    th, td {-->
+<!--        text-align: left;-->
+<!--        padding: 8px;-->
+<!--        border-bottom: 1px solid #ddd;-->
+<!--    }-->
+<!--    th {-->
+<!--        background-color: #4CAF50;-->
+<!--        color: white;-->
+<!--    }-->
+<!--</style>-->
+
+<!--<h1>Welcome to EnlectorTool</h1>-->
+
+<!--<h2>Create Lection</h2>-->
+<!--<form th:action="@{/createLection}" method="post">-->
+<!--    <label for="title">Title:</label>-->
+<!--    <input type="text" id="title" name="title" />-->
+<!--    <br />-->
+<!--    <label for="level">Level:</label>-->
+<!--    <input type="text" id="level" name="level" />-->
+<!--    <br />-->
+<!--    <label>Date:</label>-->
+<!--    <input type="date" th:name="date" required/>-->
+<!--    <br />-->
+<!--    <input type="submit" value="Submit" />-->
+<!--</form>-->
+
+<!--<h2>Lections</h2>-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Lection Id</th>-->
+<!--        <th>Title</th>-->
+<!--        <th>Level</th>-->
+<!--        <th>Date</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="lection : ${lections}">-->
+<!--        <td th:text="${lection.lectionId}" />-->
+<!--        <td th:text="${lection.title}" />-->
+<!--        <td th:text="${lection.level}" />-->
+<!--        <td th:text="${#dates.format(lection.date, 'dd-MM-yyyy')}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
