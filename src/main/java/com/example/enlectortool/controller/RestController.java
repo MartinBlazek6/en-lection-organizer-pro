@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@RequiredArgsConstructor
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/api/v1")
+@RequiredArgsConstructor
 @CrossOrigin
+@RequestMapping("/api/v1")
 public class RestController {
     private final EmailVerificationService emailVerificationService;
     private final StudentRepository studentRepository;
