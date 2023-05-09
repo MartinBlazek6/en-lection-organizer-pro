@@ -11,16 +11,15 @@ import com.example.enlectortool.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 
-@RequiredArgsConstructor
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/api/v1")
+@RequiredArgsConstructor
 @CrossOrigin
+@RequestMapping("/api/v1")
 public class RestController {
     private final EmailVerificationService emailVerificationService;
     private final StudentRepository studentRepository;
