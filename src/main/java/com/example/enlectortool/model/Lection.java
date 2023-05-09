@@ -1,5 +1,6 @@
 package com.example.enlectortool.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,5 +32,6 @@ public class Lection {
     }
 
     @ManyToMany
+    @JsonIgnore
     private List<Student> student;
 }

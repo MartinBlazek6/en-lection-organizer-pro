@@ -1,20 +1,35 @@
 package com.example.enlectortool.controller;
 
 import com.example.enlectortool.emailConfiguration.EmailVerificationService;
+import com.example.enlectortool.model.DTO.StudentDto;
+import com.example.enlectortool.model.Lection;
 import com.example.enlectortool.model.Student;
 import com.example.enlectortool.repository.StudentRepository;
+import com.example.enlectortool.service.DateService;
+import com.example.enlectortool.service.LectionService;
+import com.example.enlectortool.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @RequiredArgsConstructor
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1")
+@CrossOrigin
 public class RestController {
     private final EmailVerificationService emailVerificationService;
     private final StudentRepository studentRepository;
+
+    private final StudentService studentService;
+    private final LectionService lectionService;
+    private final DateService dateService;
+
+    private final String tokenEnv = System.getenv("token");
     private final String SERVER = System.getenv("SERVER");
 
 
@@ -35,6 +50,35 @@ public class RestController {
 
         }
         return ResponseEntity.status(400).body("Something went wrong");
+    }
+
+    @GetMapping("/lections")
+    public ResponseEntity<List<Lection>> allLections() {
+        return new ResponseEntity<>(lectionService.getAllLections(), HttpStatus.OK);
+    }
+
+    @PostMapping("/addStudent")
+    public ResponseEntity<Student> addStudent(@RequestBody StudentDto studentDto) {
+        return new ResponseEntity<>(studentService.registerNewUser(studentDto),HttpStatus.CREATED);
+    }
+
+    @PostMapping("/createLection")
+    public ResponseEntity<String> createLection(@RequestParam String title, String level, String date){
+        Date dateConverted = dateService.convertStringToDate(date);
+        lectionService.createLection(title,level,dateConverted);
+        return new ResponseEntity<>("Lection " + title + " created.",HttpStatus.CREATED);
+    }
+
+    @PostMapping("/sendInvoices")
+    public ResponseEntity<String> sendInvoices(@RequestParam Long lectionId){
+        emailVerificationService.sendInvoiceByLection(lectionService.getLectionById(lectionId));
+        return new ResponseEntity<>("Invoices for: "+lectionService.getLectionById(lectionId).getTitle()+ " sent.",HttpStatus.OK);
+    }
+
+    @PostMapping("/addStudentToLection")
+    public ResponseEntity<String> addStudentToLection(@RequestParam Long lectionId,Long studentId){
+        studentService.addStudentToLection(lectionId,studentId);
+        return new ResponseEntity<>("",HttpStatus.OK);
     }
 }
 
